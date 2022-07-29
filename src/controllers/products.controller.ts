@@ -10,6 +10,22 @@ const getAll = async (_req: Request, res: Response) => {
   }
 };
 
+const create = async (req: Request, res: Response) => {
+  try {
+    const { name, amount } = req.body;
+    const product = {
+      name,
+      amount,
+    };
+
+    const data = await productsService.create(product);
+    return res.status(201).json(data);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
 export default {
   getAll,
+  create,
 };
