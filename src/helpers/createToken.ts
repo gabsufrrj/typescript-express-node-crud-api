@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { IUser } from '../interfaces/user.interface';
+import { ILogin } from '../interfaces/login.interface';
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ const jwtConfig:object = {
   algorithm: 'HS256',
 };
 
-const secret:any = process.env.JWT_SECRET;
+const secret = 'segredosprofanos';
 
 const createToken = (user: IUser) => {
   const payload = {
@@ -23,4 +24,18 @@ const createToken = (user: IUser) => {
   return token;
 };
 
-export default createToken;
+const createLoginToken = (user: ILogin) => {
+  const payload = {
+    username: user.username,
+    password: user.password, 
+  };
+
+  const token = jwt.sign({ data: payload }, secret, jwtConfig);
+
+  return token;
+};
+
+export default {
+  createToken,
+  createLoginToken,
+};
