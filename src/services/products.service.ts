@@ -6,7 +6,7 @@ const getAll = async () => {
   return data;
 };
 
-const create = async (product: IProduct) => {
+const create = async (product: IProduct) => {  
   const data = await productsModel.create(product);
   return data;
 };
