@@ -10,6 +10,19 @@ const getAll = async (req: Request, res: Response) => {
   } 
 };
 
+const create = async (req: Request, res: Response) => {
+  try {
+    const { productsIds } = req.body;
+    const token = req.headers.authorization;    
+    const result = await ordersService.create(token, productsIds);
+    return res.status(201).json(result);
+  } catch (err) { 
+    console.log(err);
+    return res.status(500).json(err);
+  } 
+};
+
 export default {
   getAll,
+  create,
 };
